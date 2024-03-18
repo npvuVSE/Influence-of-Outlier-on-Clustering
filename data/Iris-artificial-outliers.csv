@@ -1,0 +1,5 @@
+Id,SepalLengthCm,SepalWidthCm,PetalLengthCm,PetalWidthCm,Species
+1,8,4.5,7,2.6,Iris-setosa
+2,8,2,1,2.6,Iris-setosa
+3,4.3,4.5,7,0.1,Iris-setosa
+4,4.3,2,1,0.1,Iris-setosa
