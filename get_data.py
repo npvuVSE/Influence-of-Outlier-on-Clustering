@@ -1,4 +1,4 @@
-from ucimlrepo import fetch_ucirepo 
+from ucimlrepo import fetch_ucirepo
 import pandas as pd
   
 # fetch dataset 
@@ -9,7 +9,7 @@ def fetch_dataset():
 def get_metadata():
     return fetch_dataset().metadata
 
-# get variable information 
+# get variable information
 def get_description():
     return fetch_dataset().variables
 
@@ -17,8 +17,8 @@ def get_description():
 def get_data_numerical():
     iris = fetch_dataset()
 
-    X = iris.data.features 
-    y = iris.data.targets 
+    X = iris.data.features
+    y = iris.data.targets
 
     return X, y
 
