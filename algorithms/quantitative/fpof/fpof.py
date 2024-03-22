@@ -134,6 +134,7 @@ def FPOF(dataset, min_support, top_n, top_k):
         raise ValueError('The dataset must be a list or a pandas DataFrame.')
     
     frequent_itemsets = apriori(df_discretized, min_support=min_support, use_colnames=True)
+    print(f'Number of frequent itemsets: {len(frequent_itemsets)}\n, 5 first frequent itemsets: {frequent_itemsets[:5]}')
     fpof_values = calculate_fpof_values(df, frequent_itemsets)
     top_n_transactions = output_top_n_transactions(df, fpof_values, top_n)
     top_k_contradict_patterns = find_top_k_contradict_patterns(top_n_transactions, frequent_itemsets, top_k)
