@@ -1,13 +1,14 @@
 import numpy as np
 import os
 import pandas as pd
-
+from kmodes.kmodes import KModes 
 from ucimlrepo import fetch_ucirepo
 from sklearn.cluster import KMeans, DBSCAN
-from scipy.io.arff import loadarff 
+from scipy.io.arff import loadarff
+import matplotlib.pyplot as plt 
 
 from data.get_data_from_csv import get_data_from_csv
-from data_transformations import split_df
+from data.data_transformations import split_df
 from algorithms.quantitative.cbrw import CBRW
 from algorithms.quantitative.fpof import FPOF
 
@@ -32,6 +33,7 @@ breast_cancer = fetch_ucirepo(id=14)
 # data (as pandas dataframes)
 X = breast_cancer.data.features
 y = breast_cancer.data.targets
+print(X.shape)
 
 # print(X['inv-nodes'].value_counts())
 # print(y.value_counts())
@@ -133,3 +135,26 @@ for i in range(n):
 # print('\nValue scores per attribute:')
 # for i, value_score in enumerate(value_scores):
 #     print(f'Observation ID {i+1}: {round_dict_values(value_score, 4)}')
+
+
+### Clustering
+# Elbow curve to find optimal K
+cost = []
+K = range(1,5)
+for k in list(K):
+    kmode = KModes(n_clusters=k, init = "random", n_init = 5, verbose=1)
+    kmode.fit_predict(X)
+    cost.append(kmode.cost_)
+      
+plt.plot(K, cost, 'x-')
+plt.xlabel('No. of clusters')
+plt.ylabel('Cost')
+plt.title('Elbow Curve')
+plt.show()
+# Inicializace K-módů s počtem klastrů 2
+kmode = KModes(n_clusters=2, init = "random", n_init = 5, verbose=1)
+clusters = kmode.fit_predict(X)
+
+print(f'Clusters: {clusters}')
+
+print(f'Cluster modes:\n{kmode.cluster_centroids_}')

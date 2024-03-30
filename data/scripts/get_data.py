@@ -1,19 +1,19 @@
 from ucimlrepo import fetch_ucirepo
 import pandas as pd
   
-# fetch dataset 
+# Fetch dataset 
 def fetch_dataset(): 
     return fetch_ucirepo(id=53)
   
-# get metadata
+# Get metadata
 def get_metadata():
     return fetch_dataset().metadata
 
-# get variable information
+# Get variable information
 def get_description():
     return fetch_dataset().variables
 
-# get data in original form
+# Get data in original form
 def get_data_numerical():
     iris = fetch_dataset()
 
@@ -22,7 +22,7 @@ def get_data_numerical():
 
     return X, y
 
-# get data in categorical form
+# Get data in categorical form
 def get_data_categorical():
     X, y = get_data_numerical()
 

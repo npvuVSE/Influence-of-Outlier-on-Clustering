@@ -1,10 +1,10 @@
 import pandas as pd
 
-# get data in original form
+# Get data in original form
 def get_data_from_csv(file_path):
     return pd.read_csv(file_path)
 
-# get data in categorical form
+# Get data in categorical form
 def convert_iris_to_categorical(file_path):
     df = get_data_from_csv(file_path)
 
