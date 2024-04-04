@@ -15,6 +15,7 @@ import pandas as pd
 # X, y = split_df(df)
 
 FEATURE_NAMES = ['SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm']
+PLOTS_FILEPATH = 'plots/'
 
 feature_names = {
     'SepalLengthCm': 'Délka kališního lístku [cm]',
@@ -59,7 +60,7 @@ def plot_species_boxplots(df, title=None, save_as_pdf=False, species_column='Spe
         plt.yticks(fontsize=12)
         
         if save_as_pdf:
-            f.savefig(f'{file_name}_{feature}.pdf', bbox_inches='tight')
+            f.savefig(f'{PLOTS_FILEPATH}{file_name}_{feature}.pdf', bbox_inches='tight')
         else:
             plt.show()
         # f.savefig(f"iris_boxplots_{feature}.pdf", bbox_inches='tight')
@@ -88,7 +89,7 @@ def plot_pairwise_distributions(df, title=None, save_as_pdf=False, species_colum
     
     # plt.tight_layout()
     if save_as_pdf:
-        g.savefig(f'{file_name}.pdf', bbox_inches='tight', format='pdf')
+        g.savefig(f'{PLOTS_FILEPATH}{file_name}.pdf', bbox_inches='tight', format='pdf')
     else:
         plt.show()
     # g.savefig(f"iris_pairwise_distribution.pdf", bbox_inches='tight')
