@@ -33,7 +33,12 @@ hue_order_contextual = ['Iris-setosa', 'Iris-setosa (Kontextuální Outlier)', '
 hue_order_local = ['Iris-setosa', 'Iris-setosa (Lokální Outlier)', 'Iris-versicolor', 'Iris-versicolor (Lokální Outlier)', 'Iris-virginica', 'Iris-virginica (Lokální Outlier)']
 hue_order_global = ['Iris-setosa', 'Iris-setosa (Globální Outlier)', 'Iris-versicolor', 'Iris-versicolor (Globální Outlier)', 'Iris-virginica', 'Iris-virginica (Globální Outlier)']
 
-# plot_species_boxplots(df)
+# plot_species_boxplots(
+    # df,
+    # species_column=SPECIES_COLUMN_NAME,
+    # save_as_pdf=True,
+    # file_name='iris_boxplots'
+    # )
 plot_pairwise_distributions(
     df,
     species_column=SPECIES_COLUMN_NAME,
@@ -77,8 +82,8 @@ plot_pairwise_distributions(
 # df = df.drop(columns='Id')
 # # plot_pairwise_distributions(df)
 
-plot_species_boxplots(df, species_column='Druh',
-                       save_as_pdf=True, file_name='iris_boxplots')
+# plot_species_boxplots(df, species_column='Druh',
+#                        save_as_pdf=True, file_name='iris_boxplots')
 
 ### PCA
 # features = df_with_local_outliers.drop([SPECIES_COLUMN_NAME, 'IsOutlier'], axis=1)
@@ -103,3 +108,4 @@ plot_species_boxplots(df, species_column='Druh',
 # plt.ylabel('Principal Component 2')
 # plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 # plt.show()
+

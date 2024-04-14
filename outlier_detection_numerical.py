@@ -22,7 +22,6 @@ def detect_outliers_kmeans(X, percentage, k=3, random_state=1117):
     X_dist = kmeans.transform(X)
     X_dist = np.min(X_dist, axis=1)
 
-    # Determine a threshold for outliers or use a top percentage
     threshold = np.percentile(X_dist, 100 - percentage*100)
     outliers = X_dist > threshold
     
@@ -33,7 +32,7 @@ def detect_outliers_iforest(X, n_estimators=200, contamination=0.02, random_stat
     iForest.fit(X)
     return [True if outlier == -1 else False for outlier in iForest.predict(X)]
 
-def detect_outliers_lof(X, n_neighbors=7, contamination=0.05):
+def detect_outliers_lof(X, n_neighbors=7, contamination=0.01):
     LOF = LocalOutlierFactor(n_neighbors=n_neighbors, contamination=contamination)
     return [True if outlier == -1 else False for outlier in LOF.fit_predict(X)]
 
@@ -63,50 +62,50 @@ X, y = split_df(df)
 #########################
 ### Generate Outliers ###
 #########################
-np.random.seed(19)
-### Local outliers
-df_with_local_outliers_5percent = add_local_outliers(df, outlier_percentage=5, rate=3.5, species_column=SPECIES_COLUMN_NAME)
-df_with_local_outliers_10percent = add_local_outliers(df, outlier_percentage=10, rate=3.5, species_column=SPECIES_COLUMN_NAME)
-df_with_local_outliers_15percent = add_local_outliers(df, outlier_percentage=15, rate=3.5, species_column=SPECIES_COLUMN_NAME)
+# np.random.seed(19)
+# ### Local outliers
+# df_with_local_outliers_1percent = add_local_outliers(df, outlier_percentage=1, rate=3.5, species_column=SPECIES_COLUMN_NAME)
+# df_with_local_outliers_5percent = add_local_outliers(df, outlier_percentage=5, rate=3.5, species_column=SPECIES_COLUMN_NAME)
+# df_with_local_outliers_10percent = add_local_outliers(df, outlier_percentage=10, rate=3.5, species_column=SPECIES_COLUMN_NAME)
 
-X_local_outliers_5percent, y_local_outliers_5percent = split_df(df_with_local_outliers_5percent, number_of_columns=2)
-X_local_outliers_10percent, y_local_outliers_10percent = split_df(df_with_local_outliers_10percent, number_of_columns=2)
-X_local_outliers_15percent, y_local_outliers_15percent = split_df(df_with_local_outliers_15percent, number_of_columns=2)
+# X_local_outliers_1percent, y_local_outliers_1percent = split_df(df_with_local_outliers_1percent, number_of_columns=2)
+# X_local_outliers_5percent, y_local_outliers_5percent = split_df(df_with_local_outliers_5percent, number_of_columns=2)
+# X_local_outliers_10percent, y_local_outliers_10percent = split_df(df_with_local_outliers_10percent, number_of_columns=2)
 
-print(y_local_outliers_5percent)
+# print(y_local_outliers_1percent)
 
-### Global outliers
-df_with_global_outliers_5percent = add_global_outliers(df, outlier_percentage=5, rate=3.5, species_column=SPECIES_COLUMN_NAME)
-df_with_global_outliers_10percent = add_global_outliers(df, outlier_percentage=10, rate=3.5, species_column=SPECIES_COLUMN_NAME)
-df_with_global_outliers_15percent = add_global_outliers(df, outlier_percentage=15, rate=3.5, species_column=SPECIES_COLUMN_NAME)
+# ### Global outliers
+# df_with_global_outliers_1percent = add_global_outliers(df, outlier_percentage=1, rate=3.5, species_column=SPECIES_COLUMN_NAME)
+# df_with_global_outliers_5percent = add_global_outliers(df, outlier_percentage=5, rate=3.5, species_column=SPECIES_COLUMN_NAME)
+# df_with_global_outliers_10percent = add_global_outliers(df, outlier_percentage=10, rate=3.5, species_column=SPECIES_COLUMN_NAME)
 
-X_global_outliers_5percent, y_global_outliers_5percent = split_df(df_with_global_outliers_5percent, number_of_columns=2)
-X_global_outliers_10percent, y_global_outliers_10percent = split_df(df_with_global_outliers_10percent, number_of_columns=2)
-X_global_outliers_15percent, y_global_outliers_15percent = split_df(df_with_global_outliers_15percent, number_of_columns=2)
+# X_global_outliers_1percent, y_global_outliers_1percent = split_df(df_with_global_outliers_1percent, number_of_columns=2)
+# X_global_outliers_5percent, y_global_outliers_5percent = split_df(df_with_global_outliers_5percent, number_of_columns=2)
+# X_global_outliers_10percent, y_global_outliers_10percent = split_df(df_with_global_outliers_10percent, number_of_columns=2)
 
-### Contextual outliers
-df_with_contextual_outliers_5percent = add_contextual_outliers(df, outlier_percentage=5, num_columns=3, species_column=SPECIES_COLUMN_NAME)
-df_with_contextual_outliers_10percent = add_contextual_outliers(df, outlier_percentage=10, num_columns=3, species_column=SPECIES_COLUMN_NAME)
-df_with_contextual_outliers_15percent = add_contextual_outliers(df, outlier_percentage=15, num_columns=3, species_column=SPECIES_COLUMN_NAME)
+# ### Contextual outliers
+# df_with_contextual_outliers_1percent = add_contextual_outliers(df, outlier_percentage=1, num_columns=3, species_column=SPECIES_COLUMN_NAME)
+# df_with_contextual_outliers_5percent = add_contextual_outliers(df, outlier_percentage=5, num_columns=3, species_column=SPECIES_COLUMN_NAME)
+# df_with_contextual_outliers_10percent = add_contextual_outliers(df, outlier_percentage=10, num_columns=3, species_column=SPECIES_COLUMN_NAME)
 
-X_contextual_outliers_5percent, y_contextual_outliers_5percent = split_df(df_with_contextual_outliers_5percent, number_of_columns=2)
-X_contextual_outliers_10percent, y_contextual_outliers_10percent = split_df(df_with_contextual_outliers_10percent, number_of_columns=2)
-X_contextual_outliers_15percent, y_contextual_outliers_15percent = split_df(df_with_contextual_outliers_15percent, number_of_columns=2)
+# X_contextual_outliers_1percent, y_contextual_outliers_1percent = split_df(df_with_contextual_outliers_1percent, number_of_columns=2)
+# X_contextual_outliers_5percent, y_contextual_outliers_5percent = split_df(df_with_contextual_outliers_5percent, number_of_columns=2)
+# X_contextual_outliers_10percent, y_contextual_outliers_10percent = split_df(df_with_contextual_outliers_10percent, number_of_columns=2)
 
-### Collective outliers
-df_with_collective_outliers_5percent = add_collective_outliers(df, 5, species_column=SPECIES_COLUMN_NAME)
-df_with_collective_outliers_10percent = add_collective_outliers(df, 10, species_column=SPECIES_COLUMN_NAME)
-df_with_collective_outliers_15percent = add_collective_outliers(df, 15, species_column=SPECIES_COLUMN_NAME)
+# ### Collective outliers
+# df_with_collective_outliers_1percent = add_collective_outliers(df, 1, species_column=SPECIES_COLUMN_NAME)
+# df_with_collective_outliers_5percent = add_collective_outliers(df, 5, species_column=SPECIES_COLUMN_NAME)
+# df_with_collective_outliers_10percent = add_collective_outliers(df, 10, species_column=SPECIES_COLUMN_NAME)
 
-X_collective_outliers_5percent, y_collective_outliers_5percent = split_df(df_with_collective_outliers_5percent, number_of_columns=2)
-X_collective_outliers_10percent, y_collective_outliers_10percent = split_df(df_with_collective_outliers_10percent, number_of_columns=2)
-X_collective_outliers_15percent, y_collective_outliers_15percent = split_df(df_with_collective_outliers_15percent, number_of_columns=2)
+# X_collective_outliers_1percent, y_collective_outliers_1percent = split_df(df_with_collective_outliers_1percent, number_of_columns=2)
+# X_collective_outliers_5percent, y_collective_outliers_5percent = split_df(df_with_collective_outliers_5percent, number_of_columns=2)
+# X_collective_outliers_10percent, y_collective_outliers_10percent = split_df(df_with_collective_outliers_10percent, number_of_columns=2)
 
-# print(df_with_local_outliers.head(5))
-print(df_with_local_outliers_15percent.tail(15))
-print(df_with_global_outliers_10percent.tail(15))
-print(df_with_contextual_outliers_5percent.tail(15))
-print(df_with_collective_outliers_15percent.tail(15))
+# # print(df_with_local_outliers.head(5))
+# print(df_with_local_outliers_10percent.tail(15))
+# print(df_with_global_outliers_5percent.tail(15))
+# print(df_with_contextual_outliers_1percent.tail(15))
+# print(df_with_collective_outliers_10percent.tail(15))
 
 ###################################
 # Cluster based Outlier Detection #
@@ -114,21 +113,21 @@ print(df_with_collective_outliers_15percent.tail(15))
 ###
 ### K-means
 ###
-local_outliers_kMeans_5percent = detect_outliers_kmeans(X_local_outliers_5percent, percentage=0.05)
-local_outliers_kMeans_10percent = detect_outliers_kmeans(X_local_outliers_10percent, percentage=0.1)
-local_outliers_kMeans_15percent = detect_outliers_kmeans(X_local_outliers_15percent, percentage=0.15)
+# local_outliers_kMeans_1percent = detect_outliers_kmeans(X_local_outliers_1percent, percentage=0.01)
+# local_outliers_kMeans_5percent = detect_outliers_kmeans(X_local_outliers_5percent, percentage=0.05)
+# local_outliers_kMeans_10percent = detect_outliers_kmeans(X_local_outliers_10percent, percentage=0.1)
 
-global_outliers_kMeans_5percent = detect_outliers_kmeans(X_global_outliers_5percent, percentage=0.05)
-global_outliers_kMeans_10percent = detect_outliers_kmeans(X_global_outliers_10percent, percentage=0.1)
-global_outliers_kMeans_15percent = detect_outliers_kmeans(X_global_outliers_15percent, percentage=0.15)
+# global_outliers_kMeans_1percent = detect_outliers_kmeans(X_global_outliers_1percent, percentage=0.01)
+# global_outliers_kMeans_5percent = detect_outliers_kmeans(X_global_outliers_5percent, percentage=0.05)
+# global_outliers_kMeans_10percent = detect_outliers_kmeans(X_global_outliers_10percent, percentage=0.1)
 
-contextual_outliers_kMeans_5percent = detect_outliers_kmeans(X_contextual_outliers_5percent, percentage=0.05)
-contextual_outliers_kMeans_10percent = detect_outliers_kmeans(X_contextual_outliers_10percent, percentage=0.1)
-contextual_outliers_kMeans_15percent = detect_outliers_kmeans(X_contextual_outliers_15percent, percentage=0.15)
+# contextual_outliers_kMeans_1percent = detect_outliers_kmeans(X_contextual_outliers_1percent, percentage=0.01)
+# contextual_outliers_kMeans_5percent = detect_outliers_kmeans(X_contextual_outliers_5percent, percentage=0.05)
+# contextual_outliers_kMeans_10percent = detect_outliers_kmeans(X_contextual_outliers_10percent, percentage=0.1)
 
-collective_outliers_kMeans_5percent = detect_outliers_kmeans(X_collective_outliers_5percent, percentage=0.05)
-collective_outliers_kMeans_10percent = detect_outliers_kmeans(X_collective_outliers_10percent, percentage=0.1)
-collective_outliers_kMeans_15percent = detect_outliers_kmeans(X_collective_outliers_15percent, percentage=0.15)
+# collective_outliers_kMeans_1percent = detect_outliers_kmeans(X_collective_outliers_1percent, percentage=0.01)
+# collective_outliers_kMeans_5percent = detect_outliers_kmeans(X_collective_outliers_5percent, percentage=0.05)
+# collective_outliers_kMeans_10percent = detect_outliers_kmeans(X_collective_outliers_10percent, percentage=0.1)
 
 
 ###
@@ -145,46 +144,46 @@ collective_outliers_kMeans_15percent = detect_outliers_kmeans(X_collective_outli
 ####################
 # Isolation Forest #
 ####################
+local_outliers_iForest_1percent = detect_outliers_iforest(X_local_outliers_1percent, contamination=0.01)
 local_outliers_iForest_5percent = detect_outliers_iforest(X_local_outliers_5percent, contamination=0.05)
 local_outliers_iForest_10percent = detect_outliers_iforest(X_local_outliers_10percent, contamination=0.1)
-local_outliers_iForest_15percent = detect_outliers_iforest(X_local_outliers_15percent, contamination=0.15)
 
+global_outliers_iForest_1percent = detect_outliers_iforest(X_global_outliers_1percent, contamination=0.01)
 global_outliers_iForest_5percent = detect_outliers_iforest(X_global_outliers_5percent, contamination=0.05)
 global_outliers_iForest_10percent = detect_outliers_iforest(X_global_outliers_10percent, contamination=0.1)
-global_outliers_iForest_15percent = detect_outliers_iforest(X_global_outliers_15percent, contamination=0.15)
 
+contextual_outliers_iForest_1percent = detect_outliers_iforest(X_contextual_outliers_1percent, contamination=0.01, n_estimators=100)
 contextual_outliers_iForest_5percent = detect_outliers_iforest(X_contextual_outliers_5percent, contamination=0.05, n_estimators=100)
 contextual_outliers_iForest_10percent = detect_outliers_iforest(X_contextual_outliers_10percent, contamination=0.1, n_estimators=100)
-contextual_outliers_iForest_15percent = detect_outliers_iforest(X_contextual_outliers_15percent, contamination=0.15, n_estimators=100)
 
+collective_outliers_iForest_1percent = detect_outliers_iforest(X_collective_outliers_1percent, contamination=0.01, n_estimators=100)
 collective_outliers_iForest_5percent = detect_outliers_iforest(X_collective_outliers_5percent, contamination=0.05, n_estimators=100)
 collective_outliers_iForest_10percent = detect_outliers_iforest(X_collective_outliers_10percent, contamination=0.1, n_estimators=100)
-collective_outliers_iForest_15percent = detect_outliers_iforest(X_collective_outliers_15percent, contamination=0.15, n_estimators=100)
 
 ########################
 # Local Outlier Factor #
 ########################
+local_outliers_LOF_1percent = detect_outliers_lof(X_local_outliers_1percent, contamination=0.01, n_neighbors=7)
 local_outliers_LOF_5percent = detect_outliers_lof(X_local_outliers_5percent, contamination=0.05, n_neighbors=7)
 local_outliers_LOF_10percent = detect_outliers_lof(X_local_outliers_10percent, contamination=0.1, n_neighbors=7)
-local_outliers_LOF_15percent = detect_outliers_lof(X_local_outliers_15percent, contamination=0.15, n_neighbors=7)
 
+global_outliers_LOF_1percent = detect_outliers_lof(X_global_outliers_1percent, contamination=0.01, n_neighbors=17)
 global_outliers_LOF_5percent = detect_outliers_lof(X_global_outliers_5percent, contamination=0.05, n_neighbors=17)
-global_outliers_LOF_10percent = detect_outliers_lof(X_global_outliers_10percent, contamination=0.1, n_neighbors=17)
-global_outliers_LOF_15percent = detect_outliers_lof(X_global_outliers_15percent, contamination=0.15, n_neighbors=11)
+global_outliers_LOF_10percent = detect_outliers_lof(X_global_outliers_10percent, contamination=0.1, n_neighbors=11)
 
+contextual_outliers_LOF_1percent = detect_outliers_lof(X_contextual_outliers_1percent, contamination=0.01, n_neighbors=7)
 contextual_outliers_LOF_5percent = detect_outliers_lof(X_contextual_outliers_5percent, contamination=0.05, n_neighbors=7)
 contextual_outliers_LOF_10percent = detect_outliers_lof(X_contextual_outliers_10percent, contamination=0.1, n_neighbors=7)
-contextual_outliers_LOF_15percent = detect_outliers_lof(X_contextual_outliers_15percent, contamination=0.15, n_neighbors=7)
 
-collective_outliers_LOF_5percent = detect_outliers_lof(X_collective_outliers_5percent, contamination=0.05, n_neighbors=17)
-collective_outliers_LOF_10percent = detect_outliers_lof(X_collective_outliers_10percent, contamination=0.1, n_neighbors=27)
-collective_outliers_LOF_15percent = detect_outliers_lof(X_collective_outliers_15percent, contamination=0.15, n_neighbors=37)
+collective_outliers_LOF_1percent = detect_outliers_lof(X_collective_outliers_1percent, contamination=0.01, n_neighbors=17)
+collective_outliers_LOF_5percent = detect_outliers_lof(X_collective_outliers_5percent, contamination=0.05, n_neighbors=27)
+collective_outliers_LOF_10percent = detect_outliers_lof(X_collective_outliers_10percent, contamination=0.1, n_neighbors=37)
 
 
 def print_outlier_results():
     methods = ['kMeans', 'iForest', 'LOF']
     types = ['local', 'global', 'contextual', 'collective']
-    percentages = [0.05, 0.1, 0.15]
+    percentages = [0.01, 0.05, 0.1]
 
     for method in methods:
         print(f"\nMethod: {method}")
@@ -242,7 +241,7 @@ def plot_tpr_vs_percentage_for_types(save=False, file_name=None):
     methods = ['kMeans', 'iForest', 'LOF']
     types = ['local', 'global', 'contextual', 'collective']
     types_labels = ['lokální', 'globální', 'kontextuální', 'kolektivní']
-    percentages = [5, 10, 15]
+    percentages = [1, 5, 10]
     markers = ['o', 's', '^', 'D']
     
     fig, axs = plt.subplots(2, 2, figsize=(15, 10))
@@ -278,7 +277,7 @@ def plot_tnr_vs_percentage_for_types(save=False, file_name=None):
     methods = ['kMeans', 'iForest', 'LOF']
     types = ['local', 'global', 'contextual', 'collective']
     types_labels = ['lokální', 'globální', 'kontextuální', 'kolektivní']
-    percentages = [5, 10, 15]
+    percentages = [1, 5, 10]
 
     markers = ['o', 's', '^', 'D']
     
@@ -350,10 +349,10 @@ kmeans_purity = purity_score(y_encoded, kmeans_labels)
 
 
 # dataset_with_outliers = [
-#     X_local_outliers_5percent, X_local_outliers_10percent, X_local_outliers_15percent,
-#     X_global_outliers_5percent, X_global_outliers_10percent, X_global_outliers_15percent,
-#     X_contextual_outliers_5percent, X_contextual_outliers_10percent, X_contextual_outliers_15percent,
-#     X_collective_outliers_5percent, X_collective_outliers_10percent, X_collective_outliers_15percent]
+#     X_local_outliers_1percent, X_local_outliers_5percent, X_local_outliers_10percent,
+#     X_global_outliers_1percent, X_global_outliers_5percent, X_global_outliers_10percent,
+#     X_contextual_outliers_1percent, X_contextual_outliers_5percent, X_contextual_outliers_10percent,
+#     X_collective_outliers_1percent, X_collective_outliers_5percent, X_collective_outliers_10percent]
 # for data_with_outliers in dataset_with_outliers:
 #     for linkage_type in linkages:
 #         for metric_type in metrics:
