@@ -71,7 +71,7 @@ for name, df in data_wOutliers.items():
         outliers = method(X, contamination=percentage)
         df_no_outliers = df[~np.array(outliers)]
         # print(df_no_outliers)
-        df_no_outliers.to_csv(f'data/numerical/wOutliers/run1/removed/{method_name}/{name}.csv', index=False)
+        df_no_outliers.to_csv(f'data/numerical/wOutliers/run1/removed/{method_name}/{name}_removed_{method_name}.csv', index=False)
 
         # Compare outliers with y[0] and compute metrics
         true_outliers = y['IsOutlier']

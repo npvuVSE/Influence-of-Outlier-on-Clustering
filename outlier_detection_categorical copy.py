@@ -166,7 +166,7 @@ for name, df in data_wOutliers.items():
         outliers = method(X)
         df_no_outliers = df[~np.array(outliers)]
         # print(df_no_outliers.tail(15))
-        df_no_outliers.to_csv(f'data/categorical/wOutliers/run1/removed/{method_name}/{name}.csv', index=False)
+        df_no_outliers.to_csv(f'data/categorical/wOutliers/run1/removed/{method_name}/{name}_removed_{method_name}.csv', index=False)
 
         accuracy = accuracy_score(true_outliers, outliers)
         precision = precision_score(true_outliers, outliers)

@@ -169,47 +169,8 @@ data_wOutliers = {}
 for name in outlier_names:
     for percentage in outlier_percentages:
         df = pd.read_csv(f'data/categorical/wOutliers/run1/df_{name}_outliers_{percentage}percent.csv')
+        # df = pd.read_csv(f'data/numerical/wOutliers/run1/df_{name}_outliers_{percentage}percent.csv')
         data_wOutliers[f'df_{name}_outliers_{percentage}percent'] = df
-
-# for name, df in data_wOutliers.items():
-#     for column in df.columns[:-2]:
-#         df[column] = pd.cut(df[column], bins=NB_BINS)
-#         df.to_csv(f'data/categorical/wOutliers/run1/{name}.csv', index=False)
-        # print(df[column].value_counts())
-
-# print(data_wOutliers.keys())
-
-# print shape of every dataframe in data_wOutliers
-# for name, df in data_wOutliers.items():
-#     print(f'{name}: {df.shape}')
-
-# loop through every dataframe in data_wOutliers
-# for name, df in data_wOutliers.items():
-#     print(f'{name}:')
-#     # perform clustering on each dataframe
-#     X, y = split_df(df, number_of_columns=2)
-#     X = X.astype(str)
-#     # distance_matrix_gower = gower.gower_matrix(X)
-#     distance_matrix_smc = squareform(pdist(X, metric=smc_distance))
-#     clusters_hierarchical_single = AgglomerativeClustering(n_clusters=NB_CLUSTERS, linkage='single', metric='precomputed').fit_predict(distance_matrix_smc)
-#     clusters_hierarchical_average = AgglomerativeClustering(n_clusters=NB_CLUSTERS, linkage='average', metric='precomputed').fit_predict(distance_matrix_smc)
-#     clusters_hierarchical_complete = AgglomerativeClustering(n_clusters=NB_CLUSTERS, linkage='complete', metric='precomputed').fit_predict(distance_matrix_smc)
-#     silhouette_index_single = silhouette_score(distance_matrix_smc, clusters_hierarchical_single, metric='precomputed')
-#     silhouette_index_average = silhouette_score(distance_matrix_smc, clusters_hierarchical_average, metric='precomputed')
-#     silhouette_index_complete = silhouette_score(distance_matrix_smc, clusters_hierarchical_complete, metric='precomputed')
-#     dbi_index_single = calculate_dbi(distance_matrix_smc, clusters_hierarchical_single)
-#     dbi_index_average = calculate_dbi(distance_matrix_smc, clusters_hierarchical_average)
-#     dbi_index_complete = calculate_dbi(distance_matrix_smc, clusters_hierarchical_complete)
-#     print(f'{name}: Silhouette Index Single: {silhouette_index_single}, Silhouette Index Average: {silhouette_index_average}, Silhouette Index Complete: {silhouette_index_complete}')
-#     print(f'{name}: Davies-Bouldin Index Single: {dbi_index_single}, Davies-Bouldin Index Average: {dbi_index_average}, Davies-Bouldin Index Complete: {dbi_index_complete}')
-#     # add k-modes
-#     kmodes = KModes(n_clusters=NB_CLUSTERS)
-#     clusters_kmodes = kmodes.fit_predict(X)
-#     silhouette_index_kmodes = silhouette_score(distance_matrix_smc, clusters_kmodes, metric='precomputed')
-#     dbi_intex_kmodes = calculate_dbi(distance_matrix_smc, clusters_kmodes)
-#     print(f'{name}: Silhouette Index KModes: {silhouette_index_kmodes}')
-#     print(f'{name}: Davies-Bouldin Index KModes: {dbi_intex_kmodes}')
-
 
 def perform_clustering_and_scoring(X, linkage_type, distance_matrix):
     clusters = AgglomerativeClustering(n_clusters=NB_CLUSTERS, linkage=linkage_type, metric='precomputed').fit_predict(distance_matrix)
@@ -227,6 +188,9 @@ for name, df in data_wOutliers.items():
     percentage = name.split('_')[-1].replace('percent', '')
     X, y = split_df(df, number_of_columns=2)
     X = X.astype(str)
+    for column in X.columns:
+        print(X[column].value_counts())
+
     distance_matrix_smc = squareform(pdist(X, metric=smc_distance))
 
     for linkage in linkages:
@@ -240,3 +204,77 @@ for name, df in data_wOutliers.items():
     dbi_index_kmodes = calculate_dbi(distance_matrix_smc, clusters_kmodes)
     print(f' & {kmodes_name} & {silhouette_index_kmodes:.4f} & {dbi_index_kmodes:.4f} \\\\')
 
+##############################
+# Data with outliers removed #
+##############################
+outlier_detection_methods = ['Kmodes', 'CBRW', 'FPOF']
+data_wOutliers_removed_KModes = {}
+data_wOutliers_removed_CBRW = {}
+data_wOutliers_removed_FPOF = {}
+
+for name in outlier_names:
+    for percentage in outlier_percentages:
+        for method_name in outlier_detection_methods:
+            df = pd.read_csv(f'data/categorical/wOutliers/run1/removed/{method_name}/df_{name}_outliers_{percentage}percent_removed_{method_name}.csv')
+            if method_name == 'Kmodes':
+                data_wOutliers_removed_KModes[f'df_{name}_outliers_{percentage}percent_removed_{method_name}'] = df
+            elif method_name == 'CBRW':
+                data_wOutliers_removed_CBRW[f'df_{name}_outliers_{percentage}percent_removed_{method_name}'] = df
+            elif method_name == 'FPOF':
+                data_wOutliers_removed_FPOF[f'df_{name}_outliers_{percentage}percent_removed_{method_name}'] = df
+
+# print(data_wOutliers_removed_KModes.keys())
+# print(data_wOutliers_removed_CBRW.keys())
+# print(data_wOutliers_removed_FPOF.keys())
+        
+for name, df in data_wOutliers_removed_KModes.items():
+    print(f'\n\nProcessing {name}')
+    percentage = name.split('_')[-3].replace('percent', '')
+    X, y = split_df(df, number_of_columns=2)
+    X = X.astype(str)
+    distance_matrix_smc = squareform(pdist(X, metric=smc_distance))
+
+    for linkage in linkages:
+        clusters, silhouette_index, dbi_index = perform_clustering_and_scoring(X, linkage, distance_matrix_smc)
+        print(f'{percentage}\\% & {linkage_names[linkage]} & {silhouette_index:.4f} & {dbi_index:.4f} \\\\')
+
+    kmodes = KModes(n_clusters=NB_CLUSTERS)
+    clusters_kmodes = kmodes.fit_predict(X)
+    silhouette_index_kmodes = silhouette_score(distance_matrix_smc, clusters_kmodes, metric='precomputed')
+    dbi_index_kmodes = calculate_dbi(distance_matrix_smc, clusters_kmodes)
+    print(f' & {kmodes_name} & {silhouette_index_kmodes:.4f} & {dbi_index_kmodes:.4f} \\\\')
+
+for name, df in data_wOutliers_removed_CBRW.items():
+    print(f'\n\nProcessing {name}')
+    percentage = name.split('_')[-3].replace('percent', '')
+    X, y = split_df(df, number_of_columns=2)
+    X = X.astype(str)
+    distance_matrix_smc = squareform(pdist(X, metric=smc_distance))
+
+    for linkage in linkages:
+        clusters, silhouette_index, dbi_index = perform_clustering_and_scoring(X, linkage, distance_matrix_smc)
+        print(f'{percentage}\\% & {linkage_names[linkage]} & {silhouette_index:.4f} & {dbi_index:.4f} \\\\')
+
+    kmodes = KModes(n_clusters=NB_CLUSTERS)
+    clusters_kmodes = kmodes.fit_predict(X)
+    silhouette_index_kmodes = silhouette_score(distance_matrix_smc, clusters_kmodes, metric='precomputed')
+    dbi_index_kmodes = calculate_dbi(distance_matrix_smc, clusters_kmodes)
+    print(f' & {kmodes_name} & {silhouette_index_kmodes:.4f} & {dbi_index_kmodes:.4f} \\\\')
+
+for name, df in data_wOutliers_removed_FPOF.items():
+    print(f'\n\nProcessing {name}')
+    percentage = name.split('_')[-3].replace('percent', '')
+    X, y = split_df(df, number_of_columns=2)
+    X = X.astype(str)
+    distance_matrix_smc = squareform(pdist(X, metric=smc_distance))
+    # print(X.head())
+
+    for linkage in linkages:
+        clusters, silhouette_index, dbi_index = perform_clustering_and_scoring(X, linkage, distance_matrix_smc)
+        print(f'{percentage}\\% & {linkage_names[linkage]} & {silhouette_index:.4f} & {dbi_index:.4f} \\\\')
+
+    kmodes = KModes(n_clusters=NB_CLUSTERS)
+    clusters_kmodes = kmodes.fit_predict(X)
+    silhouette_index_kmodes = silhouette_score(distance_matrix_smc, clusters_kmodes, metric='precomputed')
+    dbi_index_kmodes = calculate_dbi(distance_matrix_smc, clusters_kmodes)
+    print(f' & {kmodes_name} & {silhouette_index_kmodes:.4f} & {dbi_index_kmodes:.4f} \\\\')
