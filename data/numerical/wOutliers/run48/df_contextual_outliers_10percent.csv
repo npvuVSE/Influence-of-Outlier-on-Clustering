@@ -1,0 +1,166 @@
+SepalLengthCm,SepalWidthCm,PetalLengthCm,PetalWidthCm,Druh,IsOutlier
+5.1,3.5,1.4,0.2,Iris-setosa,False
+4.9,3.0,1.4,0.2,Iris-setosa,False
+4.7,3.2,1.3,0.2,Iris-setosa,False
+4.6,3.1,1.5,0.2,Iris-setosa,False
+5.0,3.6,1.4,0.2,Iris-setosa,False
+5.4,3.9,1.7,0.4,Iris-setosa,False
+4.6,3.4,1.4,0.3,Iris-setosa,False
+5.0,3.4,1.5,0.2,Iris-setosa,False
+4.4,2.9,1.4,0.2,Iris-setosa,False
+4.9,3.1,1.5,0.1,Iris-setosa,False
+5.4,3.7,1.5,0.2,Iris-setosa,False
+4.8,3.4,1.6,0.2,Iris-setosa,False
+4.8,3.0,1.4,0.1,Iris-setosa,False
+4.3,3.0,1.1,0.1,Iris-setosa,False
+5.8,4.0,1.2,0.2,Iris-setosa,False
+5.7,4.4,1.5,0.4,Iris-setosa,False
+5.4,3.9,1.3,0.4,Iris-setosa,False
+5.1,3.5,1.4,0.3,Iris-setosa,False
+5.7,3.8,1.7,0.3,Iris-setosa,False
+5.1,3.8,1.5,0.3,Iris-setosa,False
+5.4,3.4,1.7,0.2,Iris-setosa,False
+5.1,3.7,1.5,0.4,Iris-setosa,False
+4.6,3.6,1.0,0.2,Iris-setosa,False
+5.1,3.3,1.7,0.5,Iris-setosa,False
+4.8,3.4,1.9,0.2,Iris-setosa,False
+5.0,3.0,1.6,0.2,Iris-setosa,False
+5.0,3.4,1.6,0.4,Iris-setosa,False
+5.2,3.5,1.5,0.2,Iris-setosa,False
+5.2,3.4,1.4,0.2,Iris-setosa,False
+4.7,3.2,1.6,0.2,Iris-setosa,False
+4.8,3.1,1.6,0.2,Iris-setosa,False
+5.4,3.4,1.5,0.4,Iris-setosa,False
+5.2,4.1,1.5,0.1,Iris-setosa,False
+5.5,4.2,1.4,0.2,Iris-setosa,False
+4.9,3.1,1.5,0.1,Iris-setosa,False
+5.0,3.2,1.2,0.2,Iris-setosa,False
+5.5,3.5,1.3,0.2,Iris-setosa,False
+4.9,3.1,1.5,0.1,Iris-setosa,False
+4.4,3.0,1.3,0.2,Iris-setosa,False
+5.1,3.4,1.5,0.2,Iris-setosa,False
+5.0,3.5,1.3,0.3,Iris-setosa,False
+4.5,2.3,1.3,0.3,Iris-setosa,False
+4.4,3.2,1.3,0.2,Iris-setosa,False
+5.0,3.5,1.6,0.6,Iris-setosa,False
+5.1,3.8,1.9,0.4,Iris-setosa,False
+4.8,3.0,1.4,0.3,Iris-setosa,False
+5.1,3.8,1.6,0.2,Iris-setosa,False
+4.6,3.2,1.4,0.2,Iris-setosa,False
+5.3,3.7,1.5,0.2,Iris-setosa,False
+5.0,3.3,1.4,0.2,Iris-setosa,False
+7.0,3.2,4.7,1.4,Iris-versicolor,False
+6.4,3.2,4.5,1.5,Iris-versicolor,False
+6.9,3.1,4.9,1.5,Iris-versicolor,False
+5.5,2.3,4.0,1.3,Iris-versicolor,False
+6.5,2.8,4.6,1.5,Iris-versicolor,False
+5.7,2.8,4.5,1.3,Iris-versicolor,False
+6.3,3.3,4.7,1.6,Iris-versicolor,False
+4.9,2.4,3.3,1.0,Iris-versicolor,False
+6.6,2.9,4.6,1.3,Iris-versicolor,False
+5.2,2.7,3.9,1.4,Iris-versicolor,False
+5.0,2.0,3.5,1.0,Iris-versicolor,False
+5.9,3.0,4.2,1.5,Iris-versicolor,False
+6.0,2.2,4.0,1.0,Iris-versicolor,False
+6.1,2.9,4.7,1.4,Iris-versicolor,False
+5.6,2.9,3.6,1.3,Iris-versicolor,False
+6.7,3.1,4.4,1.4,Iris-versicolor,False
+5.6,3.0,4.5,1.5,Iris-versicolor,False
+5.8,2.7,4.1,1.0,Iris-versicolor,False
+6.2,2.2,4.5,1.5,Iris-versicolor,False
+5.6,2.5,3.9,1.1,Iris-versicolor,False
+5.9,3.2,4.8,1.8,Iris-versicolor,False
+6.1,2.8,4.0,1.3,Iris-versicolor,False
+6.3,2.5,4.9,1.5,Iris-versicolor,False
+6.1,2.8,4.7,1.2,Iris-versicolor,False
+6.4,2.9,4.3,1.3,Iris-versicolor,False
+6.6,3.0,4.4,1.4,Iris-versicolor,False
+6.8,2.8,4.8,1.4,Iris-versicolor,False
+6.7,3.0,5.0,1.7,Iris-versicolor,False
+6.0,2.9,4.5,1.5,Iris-versicolor,False
+5.7,2.6,3.5,1.0,Iris-versicolor,False
+5.5,2.4,3.8,1.1,Iris-versicolor,False
+5.5,2.4,3.7,1.0,Iris-versicolor,False
+5.8,2.7,3.9,1.2,Iris-versicolor,False
+6.0,2.7,5.1,1.6,Iris-versicolor,False
+5.4,3.0,4.5,1.5,Iris-versicolor,False
+6.0,3.4,4.5,1.6,Iris-versicolor,False
+6.7,3.1,4.7,1.5,Iris-versicolor,False
+6.3,2.3,4.4,1.3,Iris-versicolor,False
+5.6,3.0,4.1,1.3,Iris-versicolor,False
+5.5,2.5,4.0,1.3,Iris-versicolor,False
+5.5,2.6,4.4,1.2,Iris-versicolor,False
+6.1,3.0,4.6,1.4,Iris-versicolor,False
+5.8,2.6,4.0,1.2,Iris-versicolor,False
+5.0,2.3,3.3,1.0,Iris-versicolor,False
+5.6,2.7,4.2,1.3,Iris-versicolor,False
+5.7,3.0,4.2,1.2,Iris-versicolor,False
+5.7,2.9,4.2,1.3,Iris-versicolor,False
+6.2,2.9,4.3,1.3,Iris-versicolor,False
+5.1,2.5,3.0,1.1,Iris-versicolor,False
+5.7,2.8,4.1,1.3,Iris-versicolor,False
+6.3,3.3,6.0,2.5,Iris-virginica,False
+5.8,2.7,5.1,1.9,Iris-virginica,False
+7.1,3.0,5.9,2.1,Iris-virginica,False
+6.3,2.9,5.6,1.8,Iris-virginica,False
+6.5,3.0,5.8,2.2,Iris-virginica,False
+7.6,3.0,6.6,2.1,Iris-virginica,False
+4.9,2.5,4.5,1.7,Iris-virginica,False
+7.3,2.9,6.3,1.8,Iris-virginica,False
+6.7,2.5,5.8,1.8,Iris-virginica,False
+7.2,3.6,6.1,2.5,Iris-virginica,False
+6.5,3.2,5.1,2.0,Iris-virginica,False
+6.4,2.7,5.3,1.9,Iris-virginica,False
+6.8,3.0,5.5,2.1,Iris-virginica,False
+5.7,2.5,5.0,2.0,Iris-virginica,False
+5.8,2.8,5.1,2.4,Iris-virginica,False
+6.4,3.2,5.3,2.3,Iris-virginica,False
+6.5,3.0,5.5,1.8,Iris-virginica,False
+7.7,3.8,6.7,2.2,Iris-virginica,False
+7.7,2.6,6.9,2.3,Iris-virginica,False
+6.0,2.2,5.0,1.5,Iris-virginica,False
+6.9,3.2,5.7,2.3,Iris-virginica,False
+5.6,2.8,4.9,2.0,Iris-virginica,False
+7.7,2.8,6.7,2.0,Iris-virginica,False
+6.3,2.7,4.9,1.8,Iris-virginica,False
+6.7,3.3,5.7,2.1,Iris-virginica,False
+7.2,3.2,6.0,1.8,Iris-virginica,False
+6.2,2.8,4.8,1.8,Iris-virginica,False
+6.1,3.0,4.9,1.8,Iris-virginica,False
+6.4,2.8,5.6,2.1,Iris-virginica,False
+7.2,3.0,5.8,1.6,Iris-virginica,False
+7.4,2.8,6.1,1.9,Iris-virginica,False
+7.9,3.8,6.4,2.0,Iris-virginica,False
+6.4,2.8,5.6,2.2,Iris-virginica,False
+6.3,2.8,5.1,1.5,Iris-virginica,False
+6.1,2.6,5.6,1.4,Iris-virginica,False
+7.7,3.0,6.1,2.3,Iris-virginica,False
+6.3,3.4,5.6,2.4,Iris-virginica,False
+6.4,3.1,5.5,1.8,Iris-virginica,False
+6.0,3.0,4.8,1.8,Iris-virginica,False
+6.9,3.1,5.4,2.1,Iris-virginica,False
+6.7,3.1,5.6,2.4,Iris-virginica,False
+6.9,3.1,5.1,2.3,Iris-virginica,False
+5.8,2.7,5.1,1.9,Iris-virginica,False
+6.8,3.2,5.9,2.3,Iris-virginica,False
+6.7,3.3,5.7,2.5,Iris-virginica,False
+6.7,3.0,5.2,2.3,Iris-virginica,False
+6.3,2.5,5.0,1.9,Iris-virginica,False
+6.5,3.0,5.2,2.0,Iris-virginica,False
+6.2,3.4,5.4,2.3,Iris-virginica,False
+5.9,3.0,5.1,1.8,Iris-virginica,False
+4.960977699242245,2.013,5.2467,0.19897769924224473,Iris-setosa (Kontextuální Outlier),True
+4.588,3.6528740954322547,6.230874095432255,0.2881,Iris-virginica (Kontextuální Outlier),True
+7.6445,4.0259,3.4374887487315986,0.5034887487315989,Iris-versicolor (Kontextuální Outlier),True
+5.1122,2.595940255305247,5.173940255305247,0.6524,Iris-virginica (Kontextuální Outlier),True
+4.3633,3.17380092048203,1.1495,2.2258009204820306,Iris-virginica (Kontextuální Outlier),True
+7.1021,2.6166910824735723,6.6287,-0.5573089175264279,Iris-setosa (Kontextuální Outlier),True
+6.137889431301755,4.0926,4.4618894313017545,0.1681,Iris-versicolor (Kontextuální Outlier),True
+7.56076132027463,4.075,1.1882,2.9987613202746317,Iris-virginica (Kontextuální Outlier),True
+6.863225679258665,4.3389,2.1485,2.2532256792586653,Iris-versicolor (Kontextuální Outlier),True
+4.5134,3.404947722421677,5.982947722421677,0.5362,Iris-virginica (Kontextuální Outlier),True
+4.9912,2.037013538024347,4.615013538024347,0.7804,Iris-virginica (Kontextuální Outlier),True
+4.8721,3.003403432052279,2.5025,2.055403432052279,Iris-virginica (Kontextuální Outlier),True
+5.824597359198597,4.2661,4.788597359198599,0.4567,Iris-virginica (Kontextuální Outlier),True
+7.1461,2.804088973399749,4.294088973399749,0.3424,Iris-versicolor (Kontextuální Outlier),True
+6.471279696415294,3.3052796964152953,2.6292,0.4862,Iris-versicolor (Kontextuální Outlier),True

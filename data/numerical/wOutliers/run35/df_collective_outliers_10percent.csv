@@ -1,0 +1,166 @@
+SepalLengthCm,SepalWidthCm,PetalLengthCm,PetalWidthCm,Druh,IsOutlier
+5.1,3.5,1.4,0.2,Iris-setosa,False
+4.9,3.0,1.4,0.2,Iris-setosa,False
+4.7,3.2,1.3,0.2,Iris-setosa,False
+4.6,3.1,1.5,0.2,Iris-setosa,False
+5.0,3.6,1.4,0.2,Iris-setosa,False
+5.4,3.9,1.7,0.4,Iris-setosa,False
+4.6,3.4,1.4,0.3,Iris-setosa,False
+5.0,3.4,1.5,0.2,Iris-setosa,False
+4.4,2.9,1.4,0.2,Iris-setosa,False
+4.9,3.1,1.5,0.1,Iris-setosa,False
+5.4,3.7,1.5,0.2,Iris-setosa,False
+4.8,3.4,1.6,0.2,Iris-setosa,False
+4.8,3.0,1.4,0.1,Iris-setosa,False
+4.3,3.0,1.1,0.1,Iris-setosa,False
+5.8,4.0,1.2,0.2,Iris-setosa,False
+5.7,4.4,1.5,0.4,Iris-setosa,False
+5.4,3.9,1.3,0.4,Iris-setosa,False
+5.1,3.5,1.4,0.3,Iris-setosa,False
+5.7,3.8,1.7,0.3,Iris-setosa,False
+5.1,3.8,1.5,0.3,Iris-setosa,False
+5.4,3.4,1.7,0.2,Iris-setosa,False
+5.1,3.7,1.5,0.4,Iris-setosa,False
+4.6,3.6,1.0,0.2,Iris-setosa,False
+5.1,3.3,1.7,0.5,Iris-setosa,False
+4.8,3.4,1.9,0.2,Iris-setosa,False
+5.0,3.0,1.6,0.2,Iris-setosa,False
+5.0,3.4,1.6,0.4,Iris-setosa,False
+5.2,3.5,1.5,0.2,Iris-setosa,False
+5.2,3.4,1.4,0.2,Iris-setosa,False
+4.7,3.2,1.6,0.2,Iris-setosa,False
+4.8,3.1,1.6,0.2,Iris-setosa,False
+5.4,3.4,1.5,0.4,Iris-setosa,False
+5.2,4.1,1.5,0.1,Iris-setosa,False
+5.5,4.2,1.4,0.2,Iris-setosa,False
+4.9,3.1,1.5,0.1,Iris-setosa,False
+5.0,3.2,1.2,0.2,Iris-setosa,False
+5.5,3.5,1.3,0.2,Iris-setosa,False
+4.9,3.1,1.5,0.1,Iris-setosa,False
+4.4,3.0,1.3,0.2,Iris-setosa,False
+5.1,3.4,1.5,0.2,Iris-setosa,False
+5.0,3.5,1.3,0.3,Iris-setosa,False
+4.5,2.3,1.3,0.3,Iris-setosa,False
+4.4,3.2,1.3,0.2,Iris-setosa,False
+5.0,3.5,1.6,0.6,Iris-setosa,False
+5.1,3.8,1.9,0.4,Iris-setosa,False
+4.8,3.0,1.4,0.3,Iris-setosa,False
+5.1,3.8,1.6,0.2,Iris-setosa,False
+4.6,3.2,1.4,0.2,Iris-setosa,False
+5.3,3.7,1.5,0.2,Iris-setosa,False
+5.0,3.3,1.4,0.2,Iris-setosa,False
+7.0,3.2,4.7,1.4,Iris-versicolor,False
+6.4,3.2,4.5,1.5,Iris-versicolor,False
+6.9,3.1,4.9,1.5,Iris-versicolor,False
+5.5,2.3,4.0,1.3,Iris-versicolor,False
+6.5,2.8,4.6,1.5,Iris-versicolor,False
+5.7,2.8,4.5,1.3,Iris-versicolor,False
+6.3,3.3,4.7,1.6,Iris-versicolor,False
+4.9,2.4,3.3,1.0,Iris-versicolor,False
+6.6,2.9,4.6,1.3,Iris-versicolor,False
+5.2,2.7,3.9,1.4,Iris-versicolor,False
+5.0,2.0,3.5,1.0,Iris-versicolor,False
+5.9,3.0,4.2,1.5,Iris-versicolor,False
+6.0,2.2,4.0,1.0,Iris-versicolor,False
+6.1,2.9,4.7,1.4,Iris-versicolor,False
+5.6,2.9,3.6,1.3,Iris-versicolor,False
+6.7,3.1,4.4,1.4,Iris-versicolor,False
+5.6,3.0,4.5,1.5,Iris-versicolor,False
+5.8,2.7,4.1,1.0,Iris-versicolor,False
+6.2,2.2,4.5,1.5,Iris-versicolor,False
+5.6,2.5,3.9,1.1,Iris-versicolor,False
+5.9,3.2,4.8,1.8,Iris-versicolor,False
+6.1,2.8,4.0,1.3,Iris-versicolor,False
+6.3,2.5,4.9,1.5,Iris-versicolor,False
+6.1,2.8,4.7,1.2,Iris-versicolor,False
+6.4,2.9,4.3,1.3,Iris-versicolor,False
+6.6,3.0,4.4,1.4,Iris-versicolor,False
+6.8,2.8,4.8,1.4,Iris-versicolor,False
+6.7,3.0,5.0,1.7,Iris-versicolor,False
+6.0,2.9,4.5,1.5,Iris-versicolor,False
+5.7,2.6,3.5,1.0,Iris-versicolor,False
+5.5,2.4,3.8,1.1,Iris-versicolor,False
+5.5,2.4,3.7,1.0,Iris-versicolor,False
+5.8,2.7,3.9,1.2,Iris-versicolor,False
+6.0,2.7,5.1,1.6,Iris-versicolor,False
+5.4,3.0,4.5,1.5,Iris-versicolor,False
+6.0,3.4,4.5,1.6,Iris-versicolor,False
+6.7,3.1,4.7,1.5,Iris-versicolor,False
+6.3,2.3,4.4,1.3,Iris-versicolor,False
+5.6,3.0,4.1,1.3,Iris-versicolor,False
+5.5,2.5,4.0,1.3,Iris-versicolor,False
+5.5,2.6,4.4,1.2,Iris-versicolor,False
+6.1,3.0,4.6,1.4,Iris-versicolor,False
+5.8,2.6,4.0,1.2,Iris-versicolor,False
+5.0,2.3,3.3,1.0,Iris-versicolor,False
+5.6,2.7,4.2,1.3,Iris-versicolor,False
+5.7,3.0,4.2,1.2,Iris-versicolor,False
+5.7,2.9,4.2,1.3,Iris-versicolor,False
+6.2,2.9,4.3,1.3,Iris-versicolor,False
+5.1,2.5,3.0,1.1,Iris-versicolor,False
+5.7,2.8,4.1,1.3,Iris-versicolor,False
+6.3,3.3,6.0,2.5,Iris-virginica,False
+5.8,2.7,5.1,1.9,Iris-virginica,False
+7.1,3.0,5.9,2.1,Iris-virginica,False
+6.3,2.9,5.6,1.8,Iris-virginica,False
+6.5,3.0,5.8,2.2,Iris-virginica,False
+7.6,3.0,6.6,2.1,Iris-virginica,False
+4.9,2.5,4.5,1.7,Iris-virginica,False
+7.3,2.9,6.3,1.8,Iris-virginica,False
+6.7,2.5,5.8,1.8,Iris-virginica,False
+7.2,3.6,6.1,2.5,Iris-virginica,False
+6.5,3.2,5.1,2.0,Iris-virginica,False
+6.4,2.7,5.3,1.9,Iris-virginica,False
+6.8,3.0,5.5,2.1,Iris-virginica,False
+5.7,2.5,5.0,2.0,Iris-virginica,False
+5.8,2.8,5.1,2.4,Iris-virginica,False
+6.4,3.2,5.3,2.3,Iris-virginica,False
+6.5,3.0,5.5,1.8,Iris-virginica,False
+7.7,3.8,6.7,2.2,Iris-virginica,False
+7.7,2.6,6.9,2.3,Iris-virginica,False
+6.0,2.2,5.0,1.5,Iris-virginica,False
+6.9,3.2,5.7,2.3,Iris-virginica,False
+5.6,2.8,4.9,2.0,Iris-virginica,False
+7.7,2.8,6.7,2.0,Iris-virginica,False
+6.3,2.7,4.9,1.8,Iris-virginica,False
+6.7,3.3,5.7,2.1,Iris-virginica,False
+7.2,3.2,6.0,1.8,Iris-virginica,False
+6.2,2.8,4.8,1.8,Iris-virginica,False
+6.1,3.0,4.9,1.8,Iris-virginica,False
+6.4,2.8,5.6,2.1,Iris-virginica,False
+7.2,3.0,5.8,1.6,Iris-virginica,False
+7.4,2.8,6.1,1.9,Iris-virginica,False
+7.9,3.8,6.4,2.0,Iris-virginica,False
+6.4,2.8,5.6,2.2,Iris-virginica,False
+6.3,2.8,5.1,1.5,Iris-virginica,False
+6.1,2.6,5.6,1.4,Iris-virginica,False
+7.7,3.0,6.1,2.3,Iris-virginica,False
+6.3,3.4,5.6,2.4,Iris-virginica,False
+6.4,3.1,5.5,1.8,Iris-virginica,False
+6.0,3.0,4.8,1.8,Iris-virginica,False
+6.9,3.1,5.4,2.1,Iris-virginica,False
+6.7,3.1,5.6,2.4,Iris-virginica,False
+6.9,3.1,5.1,2.3,Iris-virginica,False
+5.8,2.7,5.1,1.9,Iris-virginica,False
+6.8,3.2,5.9,2.3,Iris-virginica,False
+6.7,3.3,5.7,2.5,Iris-virginica,False
+6.7,3.0,5.2,2.3,Iris-virginica,False
+6.3,2.5,5.0,1.9,Iris-virginica,False
+6.5,3.0,5.2,2.0,Iris-virginica,False
+6.2,3.4,5.4,2.3,Iris-virginica,False
+5.9,3.0,5.1,1.8,Iris-virginica,False
+7.6276,4.3431,1.3821,0.7777,Kolektivní Outlier,True
+7.7368,4.1953,1.0501,0.6918,Kolektivní Outlier,True
+7.4,4.2013,2.5494,0.4301,Kolektivní Outlier,True
+7.2114,4.0386,1.3557,0.4921,Kolektivní Outlier,True
+7.2877,4.3503,1.6189,0.688,Kolektivní Outlier,True
+7.152,4.25,2.4127,0.5117,Kolektivní Outlier,True
+7.7975,4.1315,2.6022,0.2579,Kolektivní Outlier,True
+7.4715,4.2821,1.2904,0.2013,Kolektivní Outlier,True
+7.7559,4.0,1.3267,0.7922,Kolektivní Outlier,True
+7.4434,4.383,1.9742,0.5565,Kolektivní Outlier,True
+7.4309,4.2874,2.3994,0.7024,Kolektivní Outlier,True
+7.833,4.1981,1.594,0.453,Kolektivní Outlier,True
+7.4212,4.2179,1.0335,0.1656,Kolektivní Outlier,True
+7.1858,4.2323,1.0847,0.6476,Kolektivní Outlier,True
+7.3121,4.2874,2.5453,0.1661,Kolektivní Outlier,True

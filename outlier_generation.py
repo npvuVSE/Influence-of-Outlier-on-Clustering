@@ -25,7 +25,7 @@ df = df.drop('Id', axis=1)
 X, y = split_df(df)
 
 NB_BINS = 7
-RUN_NUMBER = 3
+
 #########################
 ### Generate Outliers ###
 # #########################
@@ -65,7 +65,7 @@ RUN_NUMBER = 3
 # X_collective_outliers_1percent, y_collective_outliers_1percent = split_df(df_with_collective_outliers_1percent, number_of_columns=2)
 # X_collective_outliers_5percent, y_collective_outliers_5percent = split_df(df_with_collective_outliers_5percent, number_of_columns=2)
 # X_collective_outliers_10percent, y_collective_outliers_10percent = split_df(df_with_collective_outliers_10percent, number_of_columns=2)
-np.random.seed(1911)
+
 
 outlier_functions = [add_local_outliers, add_global_outliers, add_contextual_outliers, add_collective_outliers]
 outlier_names = ['local', 'global', 'contextual', 'collective']
@@ -73,34 +73,59 @@ outlier_percentages = [1, 5, 10]
 
 data = {}
 
-for func, name in zip(outlier_functions, outlier_names):
-    for percentage in outlier_percentages:
-        if name == 'contextual':
-            df_with_outliers = func(df, outlier_percentage=percentage, num_columns=2, species_column=SPECIES_COLUMN_NAME)
-        elif name == 'collective':
-            df_with_outliers = func(df, percentage, species_column=SPECIES_COLUMN_NAME)
-        else:
-            df_with_outliers = func(df, outlier_percentage=percentage, rate=3.5, species_column=SPECIES_COLUMN_NAME)
+run_number=50
+
+def create_outliers_and_save_as_pdf(df, run_number):
+    for func, name in zip(outlier_functions, outlier_names):
+        for percentage in outlier_percentages:
+            if name == 'contextual':
+                df_with_outliers = func(df, outlier_percentage=percentage, num_columns=2, species_column=SPECIES_COLUMN_NAME)
+            elif name == 'collective':
+                df_with_outliers = func(df, percentage, species_column=SPECIES_COLUMN_NAME)
+            else:
+                df_with_outliers = func(df, outlier_percentage=percentage, rate=3, species_column=SPECIES_COLUMN_NAME)
+            
+            X, y = split_df(df_with_outliers, number_of_columns=2)
+            
+            data[f'df_{name}_outliers_{percentage}percent'] = df_with_outliers
+            # data[f'X_{name}_outliers_{percentage}percent'] = X
+            # data[f'y_{name}_outliers_{percentage}percent'] = y
+
+
+    for name, df in data.items():
+        df.to_csv(f'/Users/ngocphuong.vu/skola/diplomka/Influence-of-Outlier-on-Clustering/data/numerical/wOutliers/run{run_number}/{name}.csv', index=False)
+
+    for name, df in data.items():
+        for column in df.columns[:-2]:
+            df[column] = pd.cut(df[column], bins=NB_BINS)
+            df.to_csv(f'/Users/ngocphuong.vu/skola/diplomka/Influence-of-Outlier-on-Clustering/data/categorical/wOutliers/run{run_number}/{name}.csv', index=False)
+
+for i in range(2, 51):
+    create_outliers_and_save_as_pdf(df, i)
+
+# for func, name in zip(outlier_functions, outlier_names):
+#     for percentage in outlier_percentages:
+#         if name == 'contextual':
+#             df_with_outliers = func(df, outlier_percentage=percentage, num_columns=2, species_column=SPECIES_COLUMN_NAME)
+#         elif name == 'collective':
+#             df_with_outliers = func(df, percentage, species_column=SPECIES_COLUMN_NAME)
+#         else:
+#             df_with_outliers = func(df, outlier_percentage=percentage, rate=3, species_column=SPECIES_COLUMN_NAME)
         
-        X, y = split_df(df_with_outliers, number_of_columns=2)
+#         X, y = split_df(df_with_outliers, number_of_columns=2)
         
-        data[f'df_{name}_outliers_{percentage}percent'] = df_with_outliers
+#         data[f'df_{name}_outliers_{percentage}percent'] = df_with_outliers
         # data[f'X_{name}_outliers_{percentage}percent'] = X
         # data[f'y_{name}_outliers_{percentage}percent'] = y
 
-# print(df_with_local_outliers.head(5))
-# print(df_with_local_outliers_10percent.tail(15))
-# print(df_with_global_outliers_5percent.tail(15))
-# print(df_with_contextual_outliers_1percent.tail(15))
-# print(df_with_collective_outliers_10percent.tail(15))
-# print(y_local_outliers_1percent)
 
-for name, df in data.items():
-    df.to_csv(f'data/numerical/wOutliers/run{RUN_NUMBER}/{name}.csv', index=False)
+# for name, df in data.items():
+#     df.to_csv(f'/Users/ngocphuong.vu/skola/diplomka/Influence-of-Outlier-on-Clustering/data/numerical/wOutliers/run{run_number}/{name}.csv', index=False)
+
+
 # print(data)
 
-
-for name, df in data.items():
-    for column in df.columns[:-2]:
-        df[column] = pd.cut(df[column], bins=NB_BINS)
-        df.to_csv(f'data/categorical/wOutliers/run{RUN_NUMBER}/{name}.csv', index=False)
+# for name, df in data.items():
+#     for column in df.columns[:-2]:
+#         df[column] = pd.cut(df[column], bins=NB_BINS)
+#         df.to_csv(f'data/categorical/wOutliers/run{run_number}/{name}.csv', index=False)

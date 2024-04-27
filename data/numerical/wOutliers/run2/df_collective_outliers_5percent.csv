@@ -149,10 +149,10 @@ SepalLengthCm,SepalWidthCm,PetalLengthCm,PetalWidthCm,Druh,IsOutlier
 6.5,3.0,5.2,2.0,Iris-virginica,False
 6.2,3.4,5.4,2.3,Iris-virginica,False
 5.9,3.0,5.1,1.8,Iris-virginica,False
-7.1907,4.0264,2.4041,0.4641,Kolektivní Outlier,True
-7.8228,4.264,2.1314,0.5457,Kolektivní Outlier,True
-7.6789,4.3755,2.6061,0.3315,Kolektivní Outlier,True
-7.6256,4.3754,1.0518,0.1963,Kolektivní Outlier,True
-7.8175,4.3297,1.2662,0.3384,Kolektivní Outlier,True
-7.4364,4.2491,1.6165,0.5684,Kolektivní Outlier,True
-7.8418,4.1409,1.5503,0.2924,Kolektivní Outlier,True
+7.3963,4.2172,1.9916,0.6158,Kolektivní Outlier,True
+7.5165,4.1264,2.7388,0.1688,Kolektivní Outlier,True
+7.1637,4.3388,2.6698,0.6481,Kolektivní Outlier,True
+7.8575,4.0296,2.5068,0.2252,Kolektivní Outlier,True
+7.8776,4.0531,2.4222,0.6664,Kolektivní Outlier,True
+7.3273,4.286,1.4065,0.4179,Kolektivní Outlier,True
+7.7421,4.3342,1.7227,0.3365,Kolektivní Outlier,True

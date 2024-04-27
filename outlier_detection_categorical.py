@@ -7,154 +7,225 @@ from sklearn.cluster import KMeans, DBSCAN
 from scipy.io.arff import loadarff
 import matplotlib.pyplot as plt 
 
-from data.get_data_from_csv import get_data_from_csv
-from data.data_transformations import split_df
 from algorithms.quantitative.cbrw import CBRW
 from algorithms.quantitative.fpof import FPOF
+from tabulate import tabulate
+from sklearn.cluster import KMeans, DBSCAN, AgglomerativeClustering
+from sklearn.preprocessing import LabelEncoder
+from sklearn.ensemble import IsolationForest
+from sklearn.neighbors import LocalOutlierFactor
+from scipy.cluster.hierarchy import dendrogram, linkage
+from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score, roc_curve, auc, ConfusionMatrixDisplay
+
+from data.scripts.get_data import get_data_numerical, get_data_categorical
+from data.scripts.get_data_from_csv import get_data_from_csv, convert_iris_to_categorical
+from data.scripts.data_transformations import split_df, concat_df
+from data.scripts.plant_outliers import add_local_outliers, add_global_outliers, add_contextual_outliers, add_collective_outliers
 
 
-################
-# Data loading #
-################
-### Cheat dataset
-def round_dict_values(input_dict, digits=4):
-    """ Helper function for printing dicts with float values """
-    return {key: round(val, digits) for key, val in input_dict.items()}
+def detect_outliers_cbrw(X, contamination):
+    detector = CBRW()
+    observations = X.to_dict('records')
+    detector.add_observations(observations)
+    detector.fit()
+    scores = detector.score(observations)
+    indexed_scores = [(i, round(score, 4)) for i, score in enumerate(scores)]
+    indexed_scores.sort(key=lambda x: x[1], reverse=True)
 
-DATA_PATH_CHEAT = './data/qualitative/cheat.csv'
+    num_outliers = int(len(X) * contamination)
+    outlier_indices = [i for i, score in indexed_scores[:num_outliers]]
+    is_outlier = [i in outlier_indices for i in range(len(X))]
 
-# df = get_data_from_csv(DATA_PATH_CHEAT)
-# X, y = split_df(df)
+    return is_outlier
 
-### Breat cancer
-# fetch dataset
-breast_cancer = fetch_ucirepo(id=14)
-  
-# data (as pandas dataframes)
-X = breast_cancer.data.features
-y = breast_cancer.data.targets
-print(X.shape)
+def detect_outliers_fpof(X, min_support, contamination):
+    fpof_values, top_n_transactions, top_k_contradict_patterns = FPOF(X, min_support=min_support, top_n=10, top_k=2)
 
-# print(X['inv-nodes'].value_counts())
-# print(y.value_counts())
+    indexed_values = [(i, value) for i, value in enumerate(fpof_values)]
+    indexed_values.sort(key=lambda x: x[1])
 
-# print(y[y == 'recurrence-events'].index)
-  
-mapping_deg_malig = {1:'one',2:'two',3:'three'}
-mapping_inv_nodes = {'0-2':'0-2','5-Mar':'3-5','8-Jun':'6-8','11-Sep':'9-11','14-Dec':'12-14','15-17':'15-17','18-20':'18-20','21-23':'21-23','24-26':'24-26','27-29':'27-29','30-32':'30-32','33-35':'33-35','36-39':'36-39'}
-X['deg-malig'] = X['deg-malig'].map(mapping_deg_malig)
-X['inv-nodes'] = X['inv-nodes'].map(mapping_inv_nodes)
-X = X.astype(str)
+    num_outliers = int(len(fpof_values) * contamination)
+    outlier_indices = [i for i, value in indexed_values[:num_outliers]]
+    is_outlier = [i in outlier_indices for i in range(len(fpof_values))]
 
+    return is_outlier
 
-# Combine X and y into one DataFrame
-df = pd.concat([X, y], axis=1)
+def calculate_smc_dissimilarity(row, centroid):
+    matches = sum(row == centroid)
+    total_attributes = len(row)
+    
+    smc_similarity = matches / total_attributes
+    return 1 - smc_similarity
 
-# Define the condition for y
-condition = (df['Class'] == 'recurrence-events')  # replace 1 with the condition you want
+def detect_outliers_kmodes(X, contamination, n_clusters=3, init='Huang', n_init=5):
+    kmodes = KModes(n_clusters=n_clusters, init=init, n_init=n_init)
+    clusters = kmodes.fit_predict(X)
 
-df = df[df['node-caps'] != 'nan']
-# Make dataset suitable for outlier detection
-drop_indices = df[condition].sample(frac=0.93).index
-df = df.drop(drop_indices)
-df = df.reset_index(drop=True)
+    dissimilarity_scores = pd.Series([
+        calculate_smc_dissimilarity(X.iloc[i], kmodes.cluster_centroids_[clusters[i]])
+        for i in range(len(X))
+    ])
 
-# Split df back into X and y
-X = df.drop('Class', axis=1)
-y = df['Class']
+    indexed_scores = [(i, score) for i, score in enumerate(dissimilarity_scores)]
+    indexed_scores.sort(key=lambda x: x[1], reverse=True)
 
-print(f"True outliers\n: {df[df['Class'] == 'recurrence-events']}")
-# print(X.tail(6))
-# print(X['inv-nodes'].value_counts())
-# print(X['irradiat'].value_counts())
+    num_outliers = int(len(dissimilarity_scores) * contamination)
+    outlier_indices = [i for i, score in indexed_scores[:num_outliers]]
 
-# print(X.shape)
-# print(y.shape)
-# print(X.head())
-# print(y.value_counts())
+    outliers = [i in outlier_indices for i in range(len(dissimilarity_scores))]
+    return outliers
 
-# print(y[y == 'recurrence-events'].index)
-# ########
-# # FPOF #
-# ########
-fpof_values, top_n_transactions, top_k_contradict_patterns = FPOF(X, min_support=0.35, top_n=20, top_k=3)
-# print('\nFPOF Values:')
-# for i, score in enumerate(fpof_values):
-#     print(f'Observation ID {i+1}: {round(score, 4)}')
+######################
+# Data with outliers #
+######################
 
-# print('\nTop-n transactions:')
-# for i, transaction in enumerate(top_n_transactions):
-#     print(f'Top-{i+1} transaction (ID:): {transaction}')
+# NB_BINS = 7
 
-# print('\nTop-k contradict patterns:')
-# for key, patterns in top_k_contradict_patterns.items():
-#     print(f'Top-{key} contradict patterns: {patterns}')
+# outlier_names = ['local', 'global', 'contextual', 'collective']
+# outlier_percentages = [1, 5, 10]
 
+# data_wOutliers = {}
 
-# ########
-# # CBRW #
-# ########
-detector = CBRW()
+# outlier_detection_methods = {
+#     'FPOF': FPOF,
+#     'CBRW': CBRW,
+#     'KModes': KModes
+# }
 
-# load data and add to detector as observations
-# observations = load_from_csv(DATA_PATH, exclude_cols=EXCLUDE_COLS)
-observations = X.to_dict('records')
+# for name in outlier_names:
+#     for percentage in outlier_percentages:
+#         df = pd.read_csv(f'data/categorical/wOutliers/run1/df_{name}_outliers_{percentage}percent.csv')
+#         data_wOutliers[f'df_{name}_outliers_{percentage}percent'] = df
 
-# add observations to detector and fit
-detector.add_observations(observations)
-detector.fit()
-
-# compute scores
-scores = detector.score(observations)
-value_scores = detector.value_scores(observations)
-
-# display results
-# print(f'Detector fit with {len(observations)} observations:')
-# for i, obs in enumerate(observations):
-#     print(f'Observation ID {i+1}: {obs}')
-
-print('\nFeature weights:')
-print(round_dict_values(detector.feature_weights, 4))
-
-# print('\nScores:')
-# for i, score in enumerate(scores):
-#     print(f'Observation ID {i+1}: {round(score, 4)}')
-
-# Create a list of tuples (id, score)
-id_score_list = [(i+1, round(score, 4)) for i, score in enumerate(scores)]
-
-# Sort the list in descending order by score
-id_score_list.sort(key=lambda x: x[1], reverse=True)
-
-# Print the top n scores
-n = 20  # replace with the desired number
-print('\nTop', n, 'scores:')
-for i in range(n):
-    print(f'Observation ID {id_score_list[i][0]}: {id_score_list[i][1]}')
-
-# print('\nValue scores per attribute:')
-# for i, value_score in enumerate(value_scores):
-#     print(f'Observation ID {i+1}: {round_dict_values(value_score, 4)}')
+# for name, df in data_wOutliers.items():
+#     for column in df.columns[:-2]:
+#         df[column] = pd.cut(df[column], bins=NB_BINS)
 
 
-### Clustering
-# Elbow curve to find optimal K
-cost = []
-K = range(1,5)
-for k in list(K):
-    kmode = KModes(n_clusters=k, init = "random", n_init = 5, verbose=1)
-    kmode.fit_predict(X)
-    cost.append(kmode.cost_)
-      
-plt.plot(K, cost, 'x-')
-plt.xlabel('No. of clusters')
-plt.ylabel('Cost')
-plt.title('Elbow Curve')
-plt.show()
-# Inicializace K-módů s počtem klastrů 2
-kmode = KModes(n_clusters=2, init = "random", n_init = 5, verbose=1)
-clusters = kmode.fit_predict(X)
+# for name, df in data_wOutliers.items():
+#     X, y = split_df(df, number_of_columns=2)
+#     true_outliers = y['IsOutlier']
+#     X = X.astype(str)
+#     percentage = int(name.split('_')[-1].replace('percent', '')) / 100 - 0.0029
 
-print(f'Clusters: {clusters}')
+#     print(f'Processing {name} with {len(X)} observations and {len(X.columns)} features')
 
-print(f'Cluster modes:\n{kmode.cluster_centroids_}')
+#     # Kmodes
+#     kmodes = KModes(n_clusters=3, init='Huang', n_init=5)
+#     clusters = kmodes.fit_predict(X)
+
+#     dissimilarity_scores = pd.Series([
+#         calculate_smc_dissimilarity(X.iloc[i], kmodes.cluster_centroids_[clusters[i]])
+#         for i in range(len(X))
+#     ])
+
+#     indexed_scores = [(i, score) for i, score in enumerate(dissimilarity_scores)]
+#     indexed_scores.sort(key=lambda x: x[1], reverse=True)
+
+#     num_outliers = int(len(dissimilarity_scores) * percentage)
+#     outlier_indices = [i for i, score in indexed_scores[:num_outliers]]
+#     outliers_kmodes = [i in outlier_indices for i in range(len(dissimilarity_scores))]
+#     # print(outliers_kmodes)
+
+#     cm = confusion_matrix(true_outliers, outliers_kmodes)
+#     cm_df = pd.DataFrame(cm, columns=['Predicted Negative', 'Predicted Positive'], index=['Actual Negative', 'Actual Positive'])
+#     print(tabulate(cm_df, headers='keys', tablefmt='psql'))
+
+#     # FPOF
+#     outliers_fpof = detect_outliers_fpof(X, min_support=0.1, contamination=percentage)
+#     # print(outliers_fpof)
+#     cm = confusion_matrix(true_outliers, outliers_fpof)
+#     cm_df = pd.DataFrame(cm, columns=['Predicted Negative', 'Predicted Positive'], index=['Actual Negative', 'Actual Positive'])
+#     print(tabulate(cm_df, headers='keys', tablefmt='psql'))
+
+#     # CBRW
+#     outliers_cbrw = detect_outliers_cbrw(X, contamination=percentage)
+#     # print(outliers_cbrw)
+#     cm = confusion_matrix(true_outliers, outliers_cbrw)
+#     cm_df = pd.DataFrame(cm, columns=['Predicted Negative', 'Predicted Positive'], index=['Actual Negative', 'Actual Positive'])
+#     print(tabulate(cm_df, headers='keys', tablefmt='psql'))
+
+
+NB_BINS = 7
+
+outlier_names = ['local', 'global', 'contextual', 'collective']
+outlier_percentages = [1, 5, 10]
+
+data_wOutliers = {}
+
+outlier_detection_methods = {
+    'FPOF': detect_outliers_fpof,
+    'CBRW': detect_outliers_cbrw,
+    'KModes': detect_outliers_kmodes
+}
+
+results = {
+    outlier_type: {
+        percentage: {
+            method: {
+                'accuracy': [],
+                'db_scores': []
+            } for method in outlier_detection_methods
+        }
+        for percentage in outlier_percentages
+    }
+    for outlier_type in outlier_names
+}    
+
+for run in range(1, 51):
+    print(f'Processing run {run}')
+    for outlier_type in outlier_names:
+        for percentage in outlier_percentages:
+            df = pd.read_csv(f'data/categorical/wOutliers/run{run}/df_{outlier_type}_outliers_{percentage}percent.csv')
+            # print(run, outlier_type, percentage)
+            
+            # data_wOutliers[f'df_{name}_outliers_{percentage}percent'] = df
+            for method_name, method in outlier_detection_methods.items():
+                # print(f'Processing {method_name} method')
+                X, y = split_df(df, number_of_columns=2)
+                true_outliers = y['IsOutlier']
+                X = X.astype(str)
+
+                if percentage == 1:
+                    percentage_float = percentage / 100 - 0.001
+                else:
+                    percentage_float = percentage / 100 - 0.005
+
+                if method_name == 'FPOF':
+                    outliers = method(X, min_support=0.1, contamination=percentage_float)
+                else:
+                    outliers = method(X, contamination=percentage_float)
+                # print(outliers)
+
+                directory = f'data/categorical/wOutliers/run{run}/removed/{method_name}'
+                if not os.path.exists(directory):
+                    os.makedirs(directory)
+
+                df_no_outliers = df[~np.array(outliers)]
+                print(df_no_outliers.tail(15))
+                df_no_outliers.to_csv(f'data/categorical/wOutliers/run{run}/removed/{method_name}/df_{outlier_type}_outliers_{percentage}percent_removed_{method_name}.csv', index=False)
+
+                accuracy = accuracy_score(true_outliers, outliers)
+                precision = precision_score(true_outliers, outliers)
+
+                results[outlier_type][percentage][method_name]['accuracy'].append(accuracy)
+                results[outlier_type][percentage][method_name]['db_scores'].append(precision)
+                print(f'Apending to {outlier_type} - {percentage} - {method_name}: Accuracy = {accuracy} - Precision = {precision}')
+                # print(f'Accuracy: {accuracy}')
+                # print(f'Precision: {precision}')
+                # print(f'{accuracy * 100:.2f} & {precision * 100:.2f} \\\\')
+                # print(results[outlier_type][percentage][method_name])
+
+                cm = confusion_matrix(true_outliers, outliers)
+                cm_df = pd.DataFrame(cm, columns=['Predicted Negative', 'Predicted Positive'], index=['Actual Negative', 'Actual Positive'])
+                print(tabulate(cm_df, headers='keys', tablefmt='psql'))
+
+for outlier_type, type in results.items():
+    for percentage, methods in type.items():
+        print(f'{outlier_type} & {percentage} &', end=' ')
+        for method, scores in methods.items():
+            avg_accuracy = np.mean(scores["accuracy"])
+            avg_db_scores = np.mean(scores["db_scores"])
+            print(f' \\{method} & {avg_accuracy * 100:.2f} & {avg_db_scores * 100:.2f} \\\\', end=' ')
+        print()
+        

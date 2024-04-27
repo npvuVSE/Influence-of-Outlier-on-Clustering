@@ -149,4 +149,4 @@ SepalLengthCm,SepalWidthCm,PetalLengthCm,PetalWidthCm,Druh,IsOutlier
 6.5,3.0,5.2,2.0,Iris-virginica,False
 6.2,3.4,5.4,2.3,Iris-virginica,False
 5.9,3.0,5.1,1.8,Iris-virginica,False
-7.1272,4.2932,4.26,1.3259999999999998,Iris-versicolor (Kontextuální Outlier),True
+7.8868,2.3721,0.7727188229535997,-0.44728117704640025,Iris-setosa (Kontextuální Outlier),True

@@ -149,18 +149,18 @@ SepalLengthCm,SepalWidthCm,PetalLengthCm,PetalWidthCm,Druh,IsOutlier
 6.5,3.0,5.2,2.0,Iris-virginica,False
 6.2,3.4,5.4,2.3,Iris-virginica,False
 5.9,3.0,5.1,1.8,Iris-virginica,False
-5.006,2.0234,1.464,2.3751,Iris-setosa (Kontextuální Outlier),True
-4.6843,2.974,5.5520000000000005,0.6897,Iris-virginica (Kontextuální Outlier),True
-4.6236,2.974,2.05,2.0260000000000002,Iris-virginica (Kontextuální Outlier),True
-5.936,4.2153,4.26,0.5636,Iris-versicolor (Kontextuální Outlier),True
-7.8484,2.7700000000000005,1.7303,1.3259999999999998,Iris-versicolor (Kontextuální Outlier),True
-5.936,4.1819,2.0714,1.3259999999999998,Iris-versicolor (Kontextuální Outlier),True
-6.587999999999998,2.974,2.2185,0.8064,Iris-virginica (Kontextuální Outlier),True
-7.4852,2.7700000000000005,1.2672,1.3259999999999998,Iris-versicolor (Kontextuální Outlier),True
-5.006,3.418,6.8427,2.3088,Iris-setosa (Kontextuální Outlier),True
-5.0715,3.9936,5.5520000000000005,2.0260000000000002,Iris-virginica (Kontextuální Outlier),True
-7.3801,2.7700000000000005,4.26,0.2203,Iris-versicolor (Kontextuální Outlier),True
-7.0889,3.418,5.7224,0.244,Iris-setosa (Kontextuální Outlier),True
-5.006,3.418,5.4339,2.2822,Iris-setosa (Kontextuální Outlier),True
-6.587999999999998,4.2245,5.5520000000000005,0.4906,Iris-virginica (Kontextuální Outlier),True
-5.006,3.418,6.1887,2.4703,Iris-setosa (Kontextuální Outlier),True
+7.5793,2.2623,1.8871990899165605,0.6671990899165605,Iris-setosa (Kontextuální Outlier),True
+6.789556348425971,4.1409,5.113556348425971,0.6998,Iris-versicolor (Kontextuální Outlier),True
+6.323048969438831,3.9896,2.4623,1.713048969438831,Iris-versicolor (Kontextuální Outlier),True
+7.200229443497702,3.586229443497704,2.2498,0.4303,Iris-virginica (Kontextuální Outlier),True
+4.6659,2.0526692331984364,4.630669233198437,0.8241,Iris-virginica (Kontextuální Outlier),True
+4.542,4.1619,5.40126510039329,1.8752651003932892,Iris-virginica (Kontextuální Outlier),True
+5.039502027757835,2.0288,1.4975020277578348,1.811,Iris-setosa (Kontextuální Outlier),True
+6.5047645906738785,4.012,5.468764590673881,0.7716,Iris-virginica (Kontextuální Outlier),True
+5.996102541592328,2.38210254159233,1.2496,0.5398,Iris-virginica (Kontextuální Outlier),True
+6.933099237523444,3.7670992375234444,2.4206,0.242,Iris-versicolor (Kontextuální Outlier),True
+4.894240556731711,2.3923,1.3522405567317115,1.9546,Iris-setosa (Kontextuální Outlier),True
+6.591030024543796,3.4250300245437963,1.9993,0.4993,Iris-versicolor (Kontextuální Outlier),True
+7.5225,3.428277604415989,1.4742776044159884,2.0925,Iris-setosa (Kontextuální Outlier),True
+7.5222,4.402507863142138,2.4485078631421375,1.8881,Iris-setosa (Kontextuální Outlier),True
+4.9202,3.3835799044905146,1.4765,2.435579904490514,Iris-virginica (Kontextuální Outlier),True

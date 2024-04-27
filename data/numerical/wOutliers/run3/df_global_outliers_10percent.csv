@@ -149,18 +149,18 @@ SepalLengthCm,SepalWidthCm,PetalLengthCm,PetalWidthCm,Druh,IsOutlier
 6.5,3.0,5.2,2.0,Iris-virginica,False
 6.2,3.4,5.4,2.3,Iris-virginica,False
 5.9,3.0,5.1,1.8,Iris-virginica,False
-8.7416,4.5716,0.01,0.01,Globální Outlier,True
-8.8667,4.6371,0.01,0.01,Globální Outlier,True
-2.769,1.4442,0.01,3.8786,Globální Outlier,True
-9.0876,4.7528,10.066,3.9935,Globální Outlier,True
-2.5415,4.8243,10.3362,4.1118,Globální Outlier,True
-9.3218,4.898,0.01,4.2336,Globální Outlier,True
-9.4665,4.9737,10.649,4.3589,Globální Outlier,True
-9.6154,1.1674,10.9359,0.01,Globální Outlier,True
-9.7686,5.1073,11.2311,0.01,Globální Outlier,True
-9.9261,5.1898,0.01,0.01,Globální Outlier,True
-1.8694,5.2747,0.01,0.01,Globální Outlier,True
-10.2037,5.3619,11.5861,0.01,Globální Outlier,True
-1.584,0.8485,0.01,0.01,Globální Outlier,True
-10.4971,5.5155,11.9201,0.01,Globální Outlier,True
-10.678,0.6906,0.01,0.01,Globální Outlier,True
+9.01,3.443,0.01,0.6133,Globální Outlier,True
+3.5498,3.8855,0.01,0.8947,Globální Outlier,True
+2.2891,1.0233,8.4144,3.5853,Globální Outlier,True
+2.2119,3.8534,8.8173,0.0246,Globální Outlier,True
+8.8698,2.591,0.01,0.01,Globální Outlier,True
+9.238,1.9972,9.1371,2.9048,Globální Outlier,True
+7.9796,1.3584,8.9598,0.01,Globální Outlier,True
+9.9273,3.554,0.01,3.4914,Globální Outlier,True
+2.8561,2.3814,0.0241,0.01,Globální Outlier,True
+9.8993,5.4335,0.01,2.7803,Globální Outlier,True
+8.7912,0.6578,9.8436,0.01,Globální Outlier,True
+3.3346,4.0064,0.01,4.678,Globální Outlier,True
+3.0152,1.3983,0.0474,4.6216,Globální Outlier,True
+9.4858,4.8692,10.6186,3.5064,Globální Outlier,True
+2.3569,0.524,0.01,0.01,Globální Outlier,True

@@ -24,14 +24,14 @@ df_with_contextual_outliers = add_contextual_outliers(df, outlier_percentage=5, 
 df_with_collective_outliers = add_collective_outliers(df, 5, species_column=SPECIES_COLUMN_NAME)
 
 # print(df_with_local_outliers.head(5))
-print(df_with_local_outliers.tail(15))
-print(df_with_global_outliers.tail(15))
-print(df_with_contextual_outliers.tail(15))
-print(df_with_collective_outliers.tail(15))
+# print(df_with_local_outliers.tail(15))
+# print(df_with_global_outliers.tail(15))
+# print(df_with_contextual_outliers.tail(15))
+# print(df_with_collective_outliers.tail(15))
 
 hue_order_contextual = ['Iris-setosa', 'Iris-setosa (Kontextuální Outlier)', 'Iris-versicolor', 'Iris-versicolor (Kontextuální Outlier)', 'Iris-virginica', 'Iris-virginica (Kontextuální Outlier)']
-hue_order_local = ['Iris-setosa', 'Iris-setosa (Lokální Outlier)', 'Iris-versicolor', 'Iris-versicolor (Lokální Outlier)', 'Iris-virginica', 'Iris-virginica (Lokální Outlier)']
-hue_order_global = ['Iris-setosa', 'Iris-setosa (Globální Outlier)', 'Iris-versicolor', 'Iris-versicolor (Globální Outlier)', 'Iris-virginica', 'Iris-virginica (Globální Outlier)']
+# hue_order_local = ['Iris-setosa', 'Lokální Outlier', 'Iris-versicolor', 'Iris-versicolor (Lokální Outlier)', 'Iris-virginica', 'Iris-virginica (Lokální Outlier)']
+# hue_order_global = ['Iris-setosa', 'Iris-setosa (Globální Outlier)', 'Iris-versicolor', 'Iris-versicolor (Globální Outlier)', 'Iris-virginica', 'Iris-virginica (Globální Outlier)']
 
 # plot_species_boxplots(
     # df,
@@ -39,29 +39,29 @@ hue_order_global = ['Iris-setosa', 'Iris-setosa (Globální Outlier)', 'Iris-ver
     # save_as_pdf=True,
     # file_name='iris_boxplots'
     # )
-plot_pairwise_distributions(
-    df,
-    species_column=SPECIES_COLUMN_NAME,
-    save_as_pdf=True,
-    file_name='iris_pairwise_distributions'
-    )
-plot_pairwise_distributions(
-    df_with_local_outliers,
-    species_column=SPECIES_COLUMN_NAME,
-    save_as_pdf=True,
-    file_name='pairwise_distributions_local_outliers',
-    legend_ncol=3,
-    hue_order=hue_order_local
-    )
+# plot_pairwise_distributions(
+#     df,
+#     species_column=SPECIES_COLUMN_NAME,
+#     # save_as_pdf=True,
+#     # file_name='iris_pairwise_distributions'
+#     )
+# plot_pairwise_distributions(
+#     df_with_local_outliers,
+#     species_column=SPECIES_COLUMN_NAME,
+#     save_as_pdf=True,
+#     file_name='pairwise_distributions_local_outliers',
+#     legend_ncol=4,
+#     # hue_order=hue_order_local
+#     )
     # title='Párové rozložení proměnných s lokálními odlehlými hodnotami podle druhu')
-plot_pairwise_distributions(
-    df_with_global_outliers,
-    species_column=SPECIES_COLUMN_NAME,
-    save_as_pdf=True,
-    file_name='pairwise_distributions_global_outliers',
-    hue_order=hue_order_global,
-    legend_ncol=3,
-    )
+# plot_pairwise_distributions(
+#     df_with_global_outliers,
+#     species_column=SPECIES_COLUMN_NAME,
+#     save_as_pdf=True,
+#     file_name='pairwise_distributions_global_outliers',
+#     # hue_order=hue_order_global,
+#     legend_ncol=4,
+#     )
 plot_pairwise_distributions(
     df_with_contextual_outliers,
     species_column=SPECIES_COLUMN_NAME,
@@ -70,13 +70,13 @@ plot_pairwise_distributions(
     file_name='pairwise_distributions_contextual_outliers',
     hue_order=hue_order_contextual,
     )
-plot_pairwise_distributions(
-    df_with_collective_outliers,
-    species_column=SPECIES_COLUMN_NAME,
-    save_as_pdf=True,
-    file_name='pairwise_distributions_collective_outliers',
-    legend_ncol=4,
-    )
+# plot_pairwise_distributions(
+#     df_with_collective_outliers,
+#     species_column=SPECIES_COLUMN_NAME,
+#     save_as_pdf=True,
+#     file_name='pairwise_distributions_collective_outliers',
+#     legend_ncol=4,
+#     )
 
 
 # df = df.drop(columns='Id')

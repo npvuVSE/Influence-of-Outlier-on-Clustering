@@ -45,6 +45,7 @@ def calculate_outlier_value(df, column, rate):
     std_dev = df[column].std()
     direction = np.random.choice([-1, 1])
     outlier_value = max(0.01, mean + direction * rate * std_dev)
+    outlier_value = max(0.01, outlier_value + np.random.uniform(-1, 1))
     return outlier_value
 
 # def create_local_outlier(species_means, chosen_species, columns, df, rate):
@@ -60,6 +61,9 @@ def calculate_outlier_value(df, column, rate):
 
 def create_local_outlier(overall_means, columns, df, rate):
     new_row = overall_means.to_dict()
+
+    for column in new_row.keys():
+        new_row[column] += np.random.uniform(-1, 1)
 
     outlier_column = np.random.choice(columns)
     outlier_value = calculate_outlier_value(df, outlier_column, rate)
@@ -231,6 +235,7 @@ def add_contextual_outliers(df, outlier_percentage, num_columns=2, species_colum
         species_means = species_df[FEATURE_NAMES].mean()
 
         outlier = species_means.copy()
+        outlier += np.random.uniform(-1, 1)
         features_to_change = random.sample(list(FEATURE_NAMES), num_columns)
         for feature in features_to_change:
             deviation = np.random.uniform(0, 1) * std_dev[feature]
@@ -283,54 +288,3 @@ def add_collective_outliers(df, outlier_percentage, species_column=SPECIES_COLUM
     df_with_outliers = pd.concat([df, outliers], ignore_index=True)
     
     return df_with_outliers
-
-
-# file_path_raw_data = '/Users/ngocphuong.vu/skola/diplomka/Influence-of-Outlier-on-Clustering/data/numerical/Iris.csv'
-
-# df = get_data_from_csv(file_path_raw_data)
-# df_outliers = get_data_from_csv(file_path_outliers)
-
-# df = concat_df(df_raw, df_outliers)
-# X, y = split_df(df)
-# df = df.drop('Id', axis=1)
-# print(df.describe())
-# print(X.head())
-# print(X.shape)
-# print(X['SepalLengthCm'].describe())
-# print(max_sepal_length)
-# X_withOutliers = plant_local_outliers(df, 10, 3, columns=['SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm'])
-# print(X_withOutliers.head(30))
-
-# if 'IsOutlier' not in df.columns:
-#     df['IsOutlier'] = False
-
-
-# Add outlier observations
-# df_with_local_outliers = add_local_outliers(df, outlier_percentage=5, rate=3, species_column='Species')
-# print(df_with_local_outliers.tail(10)) 
-# df_with_global_outliers = add_global_outliers(df, outlier_percentage=5, rate=3, species_column='Species')
-# print(df_with_global_outliers.tail(10))
-
-
-# print(f'Means per species:\n{df.groupby("Species").mean()}')
-# df_with_contextual_outliers = add_contextual_outliers(df, outlier_percentage=5, num_columns=2)
-# print(df_with_contextual_outliers.describe())
-# print(df_with_contextual_outliers.head(5))
-# print(df_with_contextual_outliers.tail(10))
-# print('Iris-setosa:\n' ,df.loc[df['Species'] == 'Iris-setosa'].describe())
-# print('Iris-setosa:\n' ,df_with_contextual_outliers.loc[df_with_contextual_outliers['Species'] == 'Iris-setosa'].describe())
-
-# print('Iris-versicolor:\n' ,df.loc[df['Species'] == 'Iris-versicolor'].describe())
-# print('Iris-versicolor:\n' ,df_with_contextual_outliers.loc[df_with_contextual_outliers['Species'] == 'Iris-versicolor'].describe())
-
-# print('Iris-virginica:\n' ,df.loc[df['Species'] == 'Iris-virginica'].describe())
-# print('Iris-virginica:\n' ,df_with_contextual_outliers.loc[df_with_contextual_outliers['Species'] == 'Iris-virginica'].describe())
-
-# print(df_with_outliers.head(30))
-# print(df_with_local_outliers.tail(17))
-# print(df_with_global_outliers.tail(17))
-
-
-
-# df_with_collective_outliers = add_collective_outliers(df, 5)
-# print(df_with_collective_outliers.tail(10))
